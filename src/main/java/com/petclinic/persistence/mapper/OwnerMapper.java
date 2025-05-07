@@ -14,6 +14,7 @@ public interface OwnerMapper {
     @Mapping(source = "name", target = "name")
     @Mapping(source = "email", target = "email")
     @Mapping(source = "phone", target = "phone")
+    @Mapping(source = "password", target = "password")
     OwnerDTO toDto(Owner owner);
 
     // Reverse mapping OwnerDTO → Owner

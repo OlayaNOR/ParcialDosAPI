@@ -19,5 +19,8 @@ public class Owner {
     
     @Column(length = 100)
     private String phone;
+
+    @Column(length = 100)
+    private String password;
     
 }
