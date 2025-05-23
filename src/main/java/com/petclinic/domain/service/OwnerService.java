@@ -23,6 +23,12 @@ public class OwnerService {
                 .orElseThrow(() -> new IllegalArgumentException("Owner not found"));
     }
 
+
+    public OwnerDTO login(Long id, String password) {
+        return ownerRepository.login(id, password)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+    }
+
     public OwnerDTO save(OwnerDTO ownerDTO) {
         return ownerRepository.save(ownerDTO);
     }

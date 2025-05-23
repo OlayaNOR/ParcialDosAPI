@@ -9,6 +9,8 @@ public interface OwnerRepository {
 
     Optional<OwnerDTO> findById(Long id);
 
+    Optional<OwnerDTO> login(Long id, String password);
+
     OwnerDTO save(OwnerDTO ownerDTO);
 
     OwnerDTO update(OwnerDTO ownerDTO);

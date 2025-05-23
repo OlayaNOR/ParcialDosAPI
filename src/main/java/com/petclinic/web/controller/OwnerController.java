@@ -1,8 +1,9 @@
 package com.petclinic.web.controller;
 
-
+import com.petclinic.domain.dto.LoginRequest;
 import com.petclinic.domain.dto.OwnerDTO;
 import com.petclinic.domain.service.OwnerService;
+
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/owners")
 public class OwnerController {
@@ -39,6 +41,17 @@ public class OwnerController {
             @ApiResponse(responseCode = "200", description = "Owner found"),
             @ApiResponse(responseCode = "404", description = "Owner not found")
     })
+    @PostMapping("/auth/login")
+    public ResponseEntity<OwnerDTO> login(@RequestBody LoginRequest request) {
+        Optional<OwnerDTO> owner = Optional.ofNullable(ownerService.login(request.getId(), request.getPassword()));
+        return owner.isPresent() ? ResponseEntity.ok(owner.get()) : ResponseEntity.status(401).build();
+    }
+
+    @Operation(summary = "Get owner by ID", description = "Returns the owner associated with the given ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Owner found"),
+            @ApiResponse(responseCode = "404", description = "Owner not found")
+    })
     @GetMapping("/{id}")
     public ResponseEntity<OwnerDTO> getOwnerById(@PathVariable("id") Long id) {
         Optional<OwnerDTO> owner = Optional.ofNullable(ownerService.findById(id));
@@ -52,8 +65,8 @@ public class OwnerController {
             @ApiResponse(responseCode = "404", description = "Not found")
     })
     @PostMapping("/save")
-    public ResponseEntity<OwnerDTO> createOwner(@RequestBody OwnerDTO customerDTO) {
-        OwnerDTO savedOwner = ownerService.save(customerDTO);
+    public ResponseEntity<OwnerDTO> createOwner(@RequestBody OwnerDTO ownerDTO) {
+        OwnerDTO savedOwner = ownerService.save(ownerDTO);
         return new ResponseEntity<>(savedOwner, HttpStatus.CREATED);
     }
 

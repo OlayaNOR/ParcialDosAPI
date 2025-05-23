@@ -5,6 +5,7 @@ import com.petclinic.domain.repository.AppointmentRepository;
 import com.petclinic.persistence.crud.AppointmentCrudRepository;
 import com.petclinic.persistence.entity.Appointment;
 import com.petclinic.persistence.mapper.AppointmentMapper;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

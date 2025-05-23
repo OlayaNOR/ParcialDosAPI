@@ -1,0 +1,21 @@
+package com.petclinic.domain.dto;
+
+public class LoginRequest {
+    private Long id;
+    private String password;
+
+    // Getters y Setters
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+}

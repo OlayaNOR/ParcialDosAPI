@@ -32,10 +32,15 @@ public class OwnerRepositoryImpl implements OwnerRepository{
                 .collect(Collectors.toList());
     }
 
-    // Retrieve by ID
     @Override
     public Optional<OwnerDTO> findById(Long id) {
         Optional<Owner> owner = ownerCrudRepository.findById(id);
+        return owner.map(ownerMapper::toDto);
+    }
+
+    @Override
+    public Optional<OwnerDTO> login(Long id, String password) {
+        Optional<Owner> owner = ownerCrudRepository.login(id, password);
         return owner.map(ownerMapper::toDto);
     }
 
